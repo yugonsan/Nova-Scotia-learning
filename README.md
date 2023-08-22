@@ -2,13 +2,17 @@
 - How to run the toy_bn254.rs
 1. compile toy.circom into toy.r1cs and toy.wasm
 
-Nova-Scotia-learning % bash ./examples/toy/compile.sh
+    ```
+    Nova-Scotia-learning % bash ./examples/toy/compile.sh
+    ```
 
 2. runt the toy_bn254.rs
+    
+    Note that m1 and m2 mac can't read the cpp file, so comment out the code which imports the toy.cpp. 
 
-Note that m1 and m2 mac can't read the cpp file, so comment out the code which imports the toy.cpp. 
-
-Nova-Scotia-learning % cargo run --release --example toy_bn254
+    ```
+    Nova-Scotia-learning % cargo run --release --example toy_bn254
+    ```
 
 # Nova Scotia
 
