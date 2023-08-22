@@ -1,5 +1,5 @@
 # Memo
-- How to run the toy_bn254.rs
+### How to run the toy_bn254.rs
 1. compile toy.circom into toy.r1cs and toy.wasm
 
     ```
