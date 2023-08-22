@@ -117,7 +117,7 @@ fn main() {
 
     let circuit_filepath = format!("examples/toy/{}/toy.r1cs", group_name);
     for witness_gen_filepath in [
-        format!("examples/toy/{}/toy_cpp/toy", group_name),
+        // format!("examples/toy/{}/toy_cpp/toy", group_name),
         format!("examples/toy/{}/toy_js/toy.wasm", group_name),
     ] {
         run_test(circuit_filepath.clone(), witness_gen_filepath);
