@@ -19,7 +19,7 @@ fn run_test(circuit_filepath: String, witness_gen_filepath: String) {
         witness_gen_filepath,
         std::any::type_name::<G1>()
     );
-    let iteration_count = 5;
+    let iteration_count = 50;
     let root = current_dir().unwrap();
 
     let circuit_file = root.join(circuit_filepath);
@@ -117,7 +117,7 @@ fn main() {
 
     let circuit_filepath = format!("examples/toy/{}/toy.r1cs", group_name);
     for witness_gen_filepath in [
-        format!("examples/toy/{}/toy_cpp/toy", group_name),
+        // format!("examples/toy/{}/toy_cpp/toy", group_name),
         format!("examples/toy/{}/toy_js/toy.wasm", group_name),
     ] {
         run_test(circuit_filepath.clone(), witness_gen_filepath);

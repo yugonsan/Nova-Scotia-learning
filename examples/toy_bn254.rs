@@ -20,7 +20,7 @@ fn run_test(circuit_filepath: String, witness_gen_filepath: String) {
         witness_gen_filepath,
         std::any::type_name::<G1>()
     );
-    let iteration_count = 5;
+    let iteration_count = 10;
     let root = current_dir().unwrap();
 
     let circuit_file = root.join(circuit_filepath);
