@@ -22,7 +22,7 @@ fn run_test(circuit_filepath: String, witness_gen_filepath: String) {
         std::any::type_name::<G1>()
     );
     // interation means the step of the folding.
-    let iteration_count = 1000;
+    let iteration_count = 10;
     //  current directory path
     let root = current_dir().unwrap();
 
@@ -47,6 +47,7 @@ fn run_test(circuit_filepath: String, witness_gen_filepath: String) {
 
     // 初めのstep_in[2]の値を入れます。iterationでいう0回目のfolding
     let start_public_input = [F::<G1>::from(1000), F::<G1>::from(1000)];
+    // let start_public_input = [F::<G1>::from(10)];
 
     // Then, create the public parameters (CRS) using the create_public_params function:
     let pp: PublicParams<G1, G2, _, _> = create_public_params(r1cs.clone());

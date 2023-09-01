@@ -1,4 +1,20 @@
 # Memo
+### development memo
+#### 9/1
+- I found that it can't compile the .circom with prime vest into r1cs, so I should use bn254. I should report this bug maybe.
+- I could see the R1CS structure
+- indx is [stp_out, step_in, adder] 
+- what is the num_aux?
+```
+num_inputs: 3
+num_aux: 1
+num_variables: 4
+constraints:
+A: (idx: 2, coeff: 0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000000)
+B: (idx: 3, coeff: 0x0000000000000000000000000000000000000000000000000000000000000001)
+C: (idx: 1, coeff: 0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000000)
+```
+
 ### How to run the toy_bn254.rs
 1. compile toy.circom into toy.r1cs and toy.wasm
 

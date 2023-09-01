@@ -34,7 +34,8 @@ fn run_test(circuit_filepath: String, witness_gen_filepath: String) {
         private_inputs.push(private_input);
     }
 
-    let start_public_input = [F::<G1>::from(10), F::<G1>::from(10)];
+    // let start_public_input = [F::<G1>::from(10), F::<G1>::from(10)];
+    let start_public_input = [F::<G1>::from(10)];
 
     let pp: PublicParams<G1, G2, _, _> = create_public_params(r1cs.clone());
 

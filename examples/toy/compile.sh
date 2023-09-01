@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd -
 circom ./examples/toy/toy.circom --r1cs --wasm --sym --c --output ./examples/toy/pasta/ --prime vesta
 cd examples/toy/pasta/toy_cpp && make
 cd -
