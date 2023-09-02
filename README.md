@@ -5,6 +5,9 @@
 - I could see the R1CS structure
 - indx is [stp_out, step_in, adder] 
 - what is the num_aux?
+[] 係数をデコードする
+[] idx配列の全ての要素を表示させる
+[] 行列で表現するようにする
 ```
 num_inputs: 3
 num_aux: 1
