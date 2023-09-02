@@ -16,7 +16,10 @@ template Example () {
     // We will instrument the piping of these private inputs in our Rust shimming.
     signal input adder;
 
-    step_out <== step_in * adder;
+    signal temp;
+
+    temp <== step_in*step_in; 
+    step_out <== temp*step_in + step_in + adder; 
 }
 
 component main { public [step_in] } = Example();
