@@ -6,6 +6,7 @@
 - 0x3064... is -1 on the BN128 curve
 - [ ] R1CSを見やすくする
 - [ ] witness vectorを計算して可視化するようにする
+- [ ] pasta curveでやり直す
 
 #### 9/1
 - I found that it can't compile the .circom with prime vest into r1cs, so I should use bn254. I should report this bug maybe.
