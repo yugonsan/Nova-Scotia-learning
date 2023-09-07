@@ -16,15 +16,19 @@ use crate::FileLocation;
 use ff::PrimeField;
 use nova_snark::traits::Group;
 
+// witness_binとして与えられるバイナリからwitnessの生成をする
 pub fn generate_witness_from_bin<Fr: PrimeField>(
     witness_bin: &Path,
     witness_input_json: &String,
     witness_output: &Path,
 ) -> Vec<Fr> {
+    // 現在のディレクトリを取得して、circom_input.jsonというファイルに書き込む
     let root = current_dir().unwrap();
     let witness_generator_input = root.join("circom_input.json");
+    // witness_input_jsonの内容を、circom_input.jsonに書き込む
     fs::write(&witness_generator_input, witness_input_json).unwrap();
 
+    // 新しい外部コマンドcircom_input.jsonと、出力先となるwitness_output
     let output = Command::new(witness_bin)
         .arg(&witness_generator_input)
         .arg(witness_output)
@@ -34,10 +38,13 @@ pub fn generate_witness_from_bin<Fr: PrimeField>(
         print!("stdout: {}", str::from_utf8(&output.stdout).unwrap());
         print!("stderr: {}", str::from_utf8(&output.stderr).unwrap());
     }
+    // circom_input.jsonは削除される
     let _ = fs::remove_file(witness_generator_input);
+    // witness_outputからwitnessを読み込んで返す
     load_witness_from_file(witness_output)
 }
 
+// wasmモジュールからwitnessを生成します
 #[cfg(not(target_family = "wasm"))]
 pub fn generate_witness_from_wasm<Fr: PrimeField>(
     witness_wasm: &FileLocation,
@@ -48,15 +55,17 @@ pub fn generate_witness_from_wasm<Fr: PrimeField>(
         FileLocation::PathBuf(path) => path,
         FileLocation::URL(_) => panic!("unreachable"),
     };
-
+    // 現在のディレクトリを取得して、circom_input.jsonというファイルに書き込む
     let root = current_dir().unwrap();
+    // witness_input_jsonの内容を、circom_input.jsonに書き込む
     let witness_generator_input = root.join("circom_input.json");
     fs::write(&witness_generator_input, witness_input_json).unwrap();
-
+    // generate_witness.jsを利用してwitnessを生成します
     let witness_js = Path::new(concat!(
         env!("CARGO_MANIFEST_DIR"),
         "/src/circom/wasm_deps/generate_witness.js"
     ));
+    // circom_input.jonとgenerate_witness.js、出力となるwitness_outputが引数になる
     let output = Command::new("node")
         .arg(witness_js)
         .arg(witness_wasm)
@@ -73,6 +82,7 @@ pub fn generate_witness_from_wasm<Fr: PrimeField>(
 }
 
 /// load witness file by filename with autodetect encoding (bin or json).
+/// ファイルの拡張子が.jsonかどうかを確認して、適切なロード関数を呼び出してwitnessをロードする
 pub fn load_witness_from_file<Fr: PrimeField>(filename: &Path) -> Vec<Fr> {
     if filename.ends_with("json") {
         load_witness_from_json_file::<Fr>(filename)
