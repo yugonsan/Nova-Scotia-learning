@@ -1,5 +1,12 @@
 # Memo
 ### development memo
+#### 9/7
+- I understood the construction of circom's R1CS
+- I summarise the R1CS structure on the powerpoint
+- 0x3064... is -1 on the BN128 curve
+- [ ] R1CSを見やすくする
+- [ ] witness vectorを計算して可視化するようにする
+
 #### 9/1
 - I found that it can't compile the .circom with prime vest into r1cs, so I should use bn254. I should report this bug maybe.
 - I could see the R1CS structure

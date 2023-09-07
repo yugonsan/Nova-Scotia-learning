@@ -11,17 +11,17 @@ Circom_TemplateFunction _functionTableParallel[1] = {
 NULL };
 uint get_main_input_signal_start() {return 2;}
 
-uint get_main_input_signal_no() {return 2;}
+uint get_main_input_signal_no() {return 1;}
 
-uint get_total_signal_no() {return 5;}
+uint get_total_signal_no() {return 3;}
 
 uint get_number_of_components() {return 1;}
 
 uint get_size_of_input_hashmap() {return 256;}
 
-uint get_size_of_witness() {return 5;}
+uint get_size_of_witness() {return 3;}
 
-uint get_size_of_constants() {return 0;}
+uint get_size_of_constants() {return 1;}
 
 uint get_size_of_io_map() {return 0;}
 
@@ -53,7 +53,7 @@ void Example_0_create(uint soffset,uint coffset,Circom_CalcWit* ctx,std::string 
 ctx->componentMemory[coffset].templateId = 0;
 ctx->componentMemory[coffset].templateName = "Example";
 ctx->componentMemory[coffset].signalStart = soffset;
-ctx->componentMemory[coffset].inputCounter = 2;
+ctx->componentMemory[coffset].inputCounter = 1;
 ctx->componentMemory[coffset].componentName = componentName;
 ctx->componentMemory[coffset].idFather = componentFather;
 ctx->componentMemory[coffset].subcomponents = new uint[0];
@@ -70,23 +70,20 @@ u32* mySubcomponents = ctx->componentMemory[ctx_index].subcomponents;
 bool* mySubcomponentsParallel = ctx->componentMemory[ctx_index].subcomponentsParallel;
 FrElement* circuitConstants = ctx->circuitConstants;
 std::string* listOfTemplateMessages = ctx->listOfTemplateMessages;
-FrElement expaux[5];
-FrElement lvar[0];
+FrElement expaux[3];
+FrElement lvar[1];
 uint sub_component_aux;
 uint index_multiple_eq;
 {
-PFrElement aux_dest = &signalValues[mySignalStart + 3];
+PFrElement aux_dest = &lvar[0];
 // load src
-Fr_mul(&expaux[0],&signalValues[mySignalStart + 1],&signalValues[mySignalStart + 1]); // line circom 21
 // end load src
-Fr_copy(aux_dest,&expaux[0]);
+Fr_copy(aux_dest,&circuitConstants[0]);
 }
 {
 PFrElement aux_dest = &signalValues[mySignalStart + 0];
 // load src
-Fr_mul(&expaux[2],&signalValues[mySignalStart + 3],&signalValues[mySignalStart + 1]); // line circom 22
-Fr_add(&expaux[1],&expaux[2],&signalValues[mySignalStart + 1]); // line circom 22
-Fr_add(&expaux[0],&expaux[1],&signalValues[mySignalStart + 2]); // line circom 22
+Fr_add(&expaux[0],&signalValues[mySignalStart + 1],&circuitConstants[0]); // line circom 21
 // end load src
 Fr_copy(aux_dest,&expaux[0]);
 }
