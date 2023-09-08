@@ -36,7 +36,7 @@ pub enum FileLocation {
     PathBuf(PathBuf),
     URL(String),
 }
-
+// 公開パラメタの生成
 pub fn create_public_params<G1, G2>(r1cs: R1CS<F<G1>>) -> PublicParams<G1, G2, C1<G1>, C2<G2>>
 where
     G1: Group<Base = <G2 as Group>::Scalar>,
