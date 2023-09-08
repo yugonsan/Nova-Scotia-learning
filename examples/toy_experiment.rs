@@ -55,19 +55,16 @@ fn print_r1cs_matrix<Fr: PrimeField>(r1cs: &nova_scotia::circom::circuit::R1CS<F
         panic!("r1cs.constraints is empty!");
     }
 
-    // 最大のidxの値を取得
     let m = r1cs.constraints.iter().flat_map(|(a, b, c)| {
         a.iter().chain(b.iter()).chain(c.iter()).map(|(idx, _)| *idx)
     }).max().unwrap_or(0) + 1;
 
-    let n = r1cs.constraints.len(); // 制約の数
+    let n = r1cs.constraints.len(); 
 
-    // 初期化
     let mut matrix_a: Vec<Vec<Fr>> = vec![vec![Fr::from(0); m]; n];
     let mut matrix_b: Vec<Vec<Fr>> = vec![vec![Fr::from(0); m]; n];
     let mut matrix_c: Vec<Vec<Fr>> = vec![vec![Fr::from(0); m]; n];
 
-    // 行列の構築
     for (i, (a, b, c)) in r1cs.constraints.iter().enumerate() {
         for (idx, coeff) in a {
             matrix_a[i][*idx] = *coeff;
@@ -80,7 +77,6 @@ fn print_r1cs_matrix<Fr: PrimeField>(r1cs: &nova_scotia::circom::circuit::R1CS<F
         }
     }
 
-    // 行列の表示
     println!("Matrix A:");
     for row in &matrix_a {
         println!("{:?}", row);
